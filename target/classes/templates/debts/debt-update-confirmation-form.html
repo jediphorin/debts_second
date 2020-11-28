@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Debt Update Confirmation Form</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<!-- Reference Bootstrap files -->
+		<link rel="stylesheet"
+		 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<style>.error {color:red}</style>
+	</head>
+
+	<body>
+		<div>
+			<div id="loginbox" style="margin-top: 50px;"
+				class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<div class="panel-title">Update The Value Of Debt</div>
+					</div>
+					<div style="padding-top: 30px" class="panel-body">
+				
+						<h3>Debts for update</h3>
+						<hr>
+				
+						<table class="table table-boardered table-striped">
+			
+							<thead class="thead-dark">
+								<tr>
+									<th>Debt ID</th>
+									<th>Debtor First Name</th>
+									<th>Debtor Last Name</th>
+									<th>Debtor Username</th>
+									<th>Creditor First Name</th>
+									<th>Creditor Last Name</th>
+									<th>Creditor Username</th>
+									<th>Info</th>
+									<th>Value</th>
+									<th>Executor Username</th>
+									<th>NEW VALUE</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+				
+							<tbody>
+			
+								<tr th:each="tempConf : ${confirmations}">
+					
+									<td th:text="${tempConf.idOfDebt}"/>
+									<td th:text="${tempConf.debtorFirstName}"/>
+									<td th:text="${tempConf.debtorLastName}"/>
+									<td th:text="${tempConf.debtorUsername}"/>
+									<td th:text="${tempConf.creditorFirstName}"/>
+									<td th:text="${tempConf.creditorLastName}"/>
+									<td th:text="${tempConf.creditorUsername}"/>
+									<td th:text="${tempConf.info}"/>
+									<td th:text="${tempConf.value}"/>
+									<td th:text="${tempConf.executorUsername}"/>
+									<td th:text="${tempConf.newValue}"/>
+						
+									<td>
+										<a 	th:href="@{/debt/processConfirmationForm(theDebtIdForConfirmation=${tempConf.idOfDebt})}"
+												class="btn btn-info btn-sm">
+											Accept
+										</a>
+							
+										<a 	th:href="@{/debt/unProcessConfirmationForm(theDebtIdForUnconfirmation=${tempConf.idOfDebt})}"
+												class="btn btn-info btn-sm">
+											Decline
+										</a>
+									</td>
+						
+							</tr>
+						</tbody>
+			
+					</table>
+			
+					<h3>Debts for delete</h3>
+					<hr>
+			
+					<table class="table table-boardered table-striped">
+			
+					<thead class="thead-dark">
+					<tr>
+						<th>Debt ID</th>
+						<th>Debtor First Name</th>
+						<th>Debtor Last Name</th>
+						<th>Debtor Username</th>
+						<th>Creditor First Name</th>
+						<th>Creditor Last Name</th>
+						<th>Creditor Username</th>
+						<th>Info</th>
+						<th>Value</th>
+						<th>Deleter</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="tempConfDel : ${listForDelete}">
+					
+						<td th:text="${tempConfDel.idOfDebt}"/>
+						<td th:text="${tempConfDel.debtorFirstName}"/>
+						<td th:text="${tempConfDel.debtorLastName}"/>
+						<td th:text="${tempConfDel.debtorUsername}"/>
+						<td th:text="${tempConfDel.creditorFirstName}"/>
+						<td th:text="${tempConfDel.creditorLastName}"/>
+						<td th:text="${tempConfDel.creditorUsername}"/>
+						<td th:text="${tempConfDel.info}"/>
+						<td th:text="${tempConfDel.value}"/>
+						<td th:text="${tempConfDel.deleter}"/>
+						
+						<td>
+							<!-- <a 	th:href="@{/debt/undelete(debtId=${tempConfDel.idOfDebt})}"
+								class="btn btn-info btn-sm">
+								Undelete
+							</a>
+							
+							<a 	th:href="@{/debt/delete(debtId=${tempConfDel.idOfDebt})}"
+								class="btn btn-danger btn-sm"
+								onclick="if (!(confirm('Are you sure you want to delete this debt?'))) return false">
+								Final delete
+							</a> -->
+						</td>
+					</tr>
+				</tbody>
+				</table>
+				</div>
+				</div>
+			</div>
+		</div>
+		<a th:href="@{/}">Back to profile</a>
+	</body>
+</html>
